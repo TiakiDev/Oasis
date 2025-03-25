@@ -1,5 +1,6 @@
 
-![Logo](https://i.imgur.com/MgjCmK3.png)
+
+![Logo](https://i.imgur.com/9HakgZl.png)
 # ✨ Oasis - Survival Game  
 
 
@@ -22,7 +23,7 @@ Projekt w fazie rozwoju, z planami rozbudowy kluczowych mechanik.
 
 ### 1. Sklonuj Repozytorium
 ```bash
-git clone https://github.com/TiakiDev/mori.git
+git clone https://github.com/TiakiDev/Oasis.git
 ```
 
 ### 2. Otwórz Projekt w Unity
@@ -53,7 +54,7 @@ git clone https://github.com/TiakiDev/mori.git
 ## 💻 Twórca [![GitHub](https://img.shields.io/badge/👤_TiakiDev-Profile-blue?logo=github)](https://github.com/TiakiDev)  
 
 👨‍🎓 **Kacper Surowiec**  
-📬 [Zgłoś problem](https://github.com/TiakiDev/mori/issues)                          
+📬 [Zgłoś problem](https://github.com/TiakiDev/Oasis/issues)                          
 💡 [Propozycje funkcji](https://github.com/TiakiDev/mori/discussions)
 
 ---
