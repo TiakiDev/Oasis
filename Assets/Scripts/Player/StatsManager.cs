@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StatsManager : MonoBehaviour
@@ -34,7 +35,7 @@ public class StatsManager : MonoBehaviour
     [SerializeField] private Image foodBar;
     [SerializeField] private Image waterBar;
     [SerializeField] private Image oxygenBar;
-    [SerializeField] public GameObject oxygenBarGameobject;
+    [SerializeField] public GameObject oxygenBarGameObject;
     
     //*Internal variables
     

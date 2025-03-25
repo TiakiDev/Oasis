@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public bool isOpen;
 
     [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private GameObject craftingPanel;
     [SerializeField] private GameObject chestPanel;
 
     [SerializeField] private GameObject crosshairs;
@@ -73,11 +74,61 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         inventoryPanel.SetActive(false);
-        chestPanel.SetActive(false); // DODAJ TO
+        craftingPanel.SetActive(false);
+        chestPanel.SetActive(false);
 
         panelRectTransform = inventoryPanel.GetComponent<RectTransform>();
 
         panelRectTransform.anchoredPosition = new Vector2(0, 0);
+    }
+    
+    public bool HasEnoughItems(ItemSO item, int requiredAmount)
+    {
+        int total = 0;
+        foreach (Slot slot in itemSlots)
+        {
+            if (slot.itemSO == item)
+            {
+                total += slot.quantity;
+                if (total >= requiredAmount) return true;
+            }
+        }
+        return false;
+    }
+    
+    public void RemoveItem(ItemSO item, int amount)
+    {
+        int remaining = amount;
+        foreach (Slot slot in itemSlots)
+        {
+            if (slot.itemSO == item)
+            {
+                int remove = Mathf.Min(remaining, slot.quantity);
+                slot.quantity -= remove;
+                remaining -= remove;
+                slot.UpdateQuantityText();
+
+                if (slot.quantity <= 0)
+                {
+                    slot.ClearSlot();
+                }
+
+                if (remaining <= 0) break;
+            }
+        }
+    }
+    
+    public int GetItemQuantity(ItemSO item)
+    {
+        int total = 0;
+        foreach (Slot slot in itemSlots)
+        {
+            if (slot.itemSO == item)
+            {
+                total += slot.quantity;
+            }
+        }
+        return total;
     }
     
     public void OpenChest(Chest chest)
@@ -152,6 +203,7 @@ public class InventoryManager : MonoBehaviour
     private void CloseAllTabs()
     {
         inventoryPanel.SetActive(false);
+        craftingPanel.SetActive(false);
         chestPanel.SetActive(false);
         isOpen = false;
             
@@ -211,6 +263,23 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
+        
+    }
+
+    public void OpenCraftingMenu()
+    {
+        CloseAllTabs();
+        
+        craftingPanel.SetActive(true);
+        isOpen = true;
+        FirstPersonController.instance.lockCursor = false;
+        FirstPersonController.instance.cameraCanMove = false;
+        FirstPersonController.instance.crosshairObject.gameObject.SetActive(false);
+        SelectionManager.instance.interactionText.gameObject.SetActive(false);
+            
+        ConstructionManager.instance.ExitConstructionMode();
+            
+        crosshairs.SetActive(false);
         
     }
     

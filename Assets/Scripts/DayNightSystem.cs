@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DayNightSystem : MonoBehaviour
 {
+    public static DayNightSystem instance;
+    
     public Light directionalLight;
     
     [Header("Time Settings")]
@@ -21,6 +23,18 @@ public class DayNightSystem : MonoBehaviour
     
     private float blendedValue = 0f;
 
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+    
     private void Start()
     {
             lightIntensityCurve = new AnimationCurve(

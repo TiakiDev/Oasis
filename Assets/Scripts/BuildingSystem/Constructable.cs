@@ -12,6 +12,9 @@ public class Constructable : MonoBehaviour
 
     public bool needFoundation;
     
+    [Header("Rotation Settings")]
+    public bool allowRotation = true;
+    
     [Space]
     
     [Header("Other")]
@@ -74,8 +77,9 @@ public class Constructable : MonoBehaviour
         
         if(Physics.Raycast(ray, out RaycastHit hit, maxGroundDistance, checkLayers))
         {
-            transform.position = hit.point + Vector3.up * surfaceOffset;
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            // Uwzględnij ręczną rotację
+            Quaternion manualRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * manualRotation;
             return true;
         }
         return false;

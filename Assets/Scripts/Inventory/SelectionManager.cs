@@ -61,6 +61,7 @@ private void Update()
         MineableOre mineableOre = selectionTransform.GetComponent<MineableOre>();
         Item item = selectionTransform.GetComponent<Item>();
         Chest chest = selectionTransform.GetComponent<Chest>();
+        Workbench workbench = selectionTransform.GetComponent<Workbench>();
 
         // Obsługa drzew
         if (choppableTree && choppableTree.playerInRange && !InventoryManager.instance.isOpen)
@@ -130,7 +131,7 @@ private void Update()
         }
         
         // Obsługa skrzyni
-        if (chest && interactable.playerInRange && onTarget)
+        if (chest || workbench && interactable.playerInRange && onTarget)
         {
             interactionCursor.SetActive(true);
             anyCursorActive = true;
@@ -138,6 +139,10 @@ private void Update()
             if (Input.GetKeyDown(KeyCode.Mouse0) && currentTarget != null && currentTarget.playerInRange && chest)
             {
                 chest.Interact();
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0) && currentTarget != null && currentTarget.playerInRange && workbench)
+            {
+                workbench.Interact();
             }
         }
         else

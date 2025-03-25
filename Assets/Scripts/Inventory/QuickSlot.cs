@@ -130,6 +130,9 @@ public class QuickSlot : MonoBehaviour
                 case "Chest":
                     ConstructionManager.instance.ActivateConstructionPlacement("ChestModel");
                     break;
+                case "Workbench tier 3":
+                    ConstructionManager.instance.ActivateConstructionPlacement("Workbench3Model");
+                    break;
             }
         }
     }

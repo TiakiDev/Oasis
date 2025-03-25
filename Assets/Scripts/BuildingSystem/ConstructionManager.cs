@@ -13,6 +13,9 @@ public class ConstructionManager : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask structureLayer;
     
+    public float rotationSpeed = 100f;
+    private float currentRotation = 0f;
+    
     public GameObject itemToBeConstructed;
     public bool inConstructionMode = false;
     public GameObject constructionHoldingSpot;
@@ -42,6 +45,8 @@ public class ConstructionManager : MonoBehaviour
  
     public void ActivateConstructionPlacement(string itemToConstruct)
     {
+        currentRotation = 0f;
+        
         GameObject item = Instantiate(Resources.Load<GameObject>(itemToConstruct));
         
         item.name = itemToConstruct;
@@ -70,6 +75,12 @@ private void Update()
 
     if (itemToBeConstructed != null && inConstructionMode)
     {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            RotateConstruction(scroll);
+        }
+        
         if (!selectingAGhost && itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.GetComponent<Constructable>().isProp)
         {
             SnapToSurface();
@@ -134,6 +145,18 @@ private void Update()
         selectedGhost = null;
         selectingAGhost = false;
     }
+    
+    private void RotateConstruction(float scrollInput)
+    {
+        currentRotation += scrollInput * rotationSpeed;
+        itemToBeConstructed.transform.rotation = Quaternion.Euler(0f, currentRotation, 0f);
+        
+        // Aktualizacja pozycji dla zachowania poprawnego snapowania
+        if (itemToBeConstructed.GetComponent<Constructable>().isProp)
+        {
+            SnapToSurface();
+        }
+    }
 
     private void SnapToSurface()
     {
@@ -156,7 +179,9 @@ private void Update()
                 Time.deltaTime * 15f
             );
 
-            Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * 
+                                        Quaternion.Euler(0f, currentRotation, 0f);
+            
             itemToBeConstructed.transform.rotation = Quaternion.Slerp(
                 itemToBeConstructed.transform.rotation,
                 targetRotation,
@@ -164,6 +189,8 @@ private void Update()
             );
         }
     }
+    
+    
 
     private void PlaceItemInGhostPosition(GameObject copyOfGhost)
     {
@@ -293,11 +320,6 @@ private void Update()
         }
         return false;
     }
-
-    
-     
-
-    
  
     private float XPositionToAccurateFloat(GameObject ghost)
     {
@@ -380,4 +402,6 @@ private void Update()
  
         }
     }
+    
+    
 }

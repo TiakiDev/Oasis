@@ -7,7 +7,7 @@ public class SwimArea : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.GetComponent<FirstPersonController>().isSwimming = true;
-            StatsManager.instance.oxygenBarGameobject.gameObject.SetActive(true);
+            StatsManager.instance.oxygenBarGameObject.gameObject.SetActive(true);
             StatsManager.instance.shouldDrainOxygen = true;
         }
     }
@@ -17,7 +17,7 @@ public class SwimArea : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.GetComponent<FirstPersonController>().isSwimming = false;
-            StatsManager.instance.oxygenBarGameobject.gameObject.SetActive(false);
+            StatsManager.instance.oxygenBarGameObject.gameObject.SetActive(false);
             StatsManager.instance.ChangeOxygen(100);
             StatsManager.instance.shouldDrainOxygen = false;
         }
