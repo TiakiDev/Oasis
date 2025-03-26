@@ -27,6 +27,9 @@ public class SelectionManager : MonoBehaviour
     public GameObject selectedTree;
     public GameObject selectedOre;
     
+    public static Vector3 lastHitPoint;
+    public static Vector3 lastHitNormal;
+    
 
     private void Awake()
     {
@@ -48,12 +51,17 @@ public class SelectionManager : MonoBehaviour
 private void Update()
 {
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    
     RaycastHit hit;
+    
     currentTarget = null;
     bool anyCursorActive = false; // Flaga śledząca aktywność kursora
 
     if (Physics.Raycast(ray, out hit))
     {
+        lastHitPoint = hit.point;
+        lastHitNormal = hit.normal;
+        
         var selectionTransform = hit.transform;
 
         InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();

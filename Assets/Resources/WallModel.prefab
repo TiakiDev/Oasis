@@ -130,6 +130,8 @@ MonoBehaviour:
   canSnapToStructures: 0
   isProp: 0
   needFoundation: 1
+  particlesPrefab: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  allowRotation: 1
   isGrounded: 0
   isOverlappingItems: 0
   isValidToBeBuilt: 0

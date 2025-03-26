@@ -172,7 +172,7 @@ private void Update()
         
         if(Physics.Raycast(ray, out RaycastHit hit, 5f, snapLayers))
         {
-            Vector3 targetPosition = hit.point + Vector3.up * placementOffset;
+            Vector3 targetPosition = hit.point + Vector3.up * constructable.surfaceOffset;
             itemToBeConstructed.transform.position = Vector3.Lerp(
                 itemToBeConstructed.transform.position,
                 targetPosition,

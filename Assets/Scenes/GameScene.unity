@@ -52605,6 +52605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolHolderAnimator: {fileID: 1820233964}
+  hitParticlePrefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
+  particleOffset: 0.2
 --- !u!114 &1356050936
 MonoBehaviour:
   m_ObjectHideFlags: 0

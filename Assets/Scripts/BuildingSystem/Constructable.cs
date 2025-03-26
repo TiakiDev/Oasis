@@ -12,6 +12,8 @@ public class Constructable : MonoBehaviour
 
     public bool needFoundation;
     
+    public GameObject particlesPrefab;
+    
     [Header("Rotation Settings")]
     public bool allowRotation = true;
     
@@ -74,14 +76,18 @@ public class Constructable : MonoBehaviour
         }
 
         Ray ray = new Ray(transform.position + Vector3.up * 0.5f, Vector3.down);
+        float rayLength = maxGroundDistance; // Użyj zmiennej do debugowania
         
         if(Physics.Raycast(ray, out RaycastHit hit, maxGroundDistance, checkLayers))
         {
             // Uwzględnij ręczną rotację
             Quaternion manualRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
             transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * manualRotation;
+            Debug.Log($"Hit ground at distance: {hit.distance}");
             return true;
         }
+        
+        Debug.Log("No ground detected!");
         return false;
     }
 
@@ -163,6 +169,11 @@ public class Constructable : MonoBehaviour
     public void SetDefaultColor()
     {
         mRenderer.material = defaultMaterial;
+    }
+
+    public void PlaceEffect()
+    {
+        Instantiate(particlesPrefab, transform.position, Quaternion.identity);
     }
  
     public void ExtractGhostMembers()

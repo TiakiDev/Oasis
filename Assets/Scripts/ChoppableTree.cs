@@ -67,7 +67,7 @@ public class ChoppableTree : MonoBehaviour
 
     private IEnumerator Hit()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0f);
         animator.SetTrigger("Shake");
         treeHealth -= 1f;
 
