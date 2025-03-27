@@ -5,7 +5,6 @@ using UnityEngine;
 public class Workbench : MonoBehaviour
 {
     public int tier = 1;
-    [SerializeField] private float interactionRange = 2f;
 
     private void OnTriggerEnter(Collider other)
     {

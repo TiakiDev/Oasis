@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: 
   itemName: Rock
-  itemIcon: {fileID: 21300000, guid: b16a7eacba006cf4d8b52caa9fa7e411, type: 3}
+  itemIcon: {fileID: 21300000, guid: 17141dc38ec5ba0448d4d4676bd238e1, type: 3}
   itemDescription: 
   itemType: 0
   hungerAmount: 0

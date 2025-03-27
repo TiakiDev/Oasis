@@ -115,7 +115,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  redMaterial: {fileID: 2100000, guid: 156b4043a15b3c146b41b5a29d60182b, type: 2}
+  redMaterial: {fileID: 2100000, guid: 9cb7ef53304e28746bae0fe77dd20d97, type: 2}
   greenMaterial: {fileID: 2100000, guid: 5b97a5732664cd94c86e01cfbe655e62, type: 2}
   defaultMaterial: {fileID: 2100000, guid: 8436d7f4fe47cf14a94216deb0dd5cd5, type: 2}
   ghostList: []

@@ -119,7 +119,7 @@ public class QuickSlot : MonoBehaviour
 
         if (item.itemType == ItemSO.ItemType.Constructable)
         {
-            switch (item.itemName)
+            /*switch (item.itemName)
             {
                 case "Foundation":
                     ConstructionManager.instance.ActivateConstructionPlacement("FoundationModel");
@@ -133,7 +133,12 @@ public class QuickSlot : MonoBehaviour
                 case "Workbench tier 3":
                     ConstructionManager.instance.ActivateConstructionPlacement("Workbench3Model");
                     break;
-            }
+                case "Workbench tier 2":
+                    ConstructionManager.instance.ActivateConstructionPlacement("Workbench2Model");
+                    break;
+            }*/
+            
+            ConstructionManager.instance.ActivateConstructionPlacement(item.itemName + "Model");
         }
     }
     

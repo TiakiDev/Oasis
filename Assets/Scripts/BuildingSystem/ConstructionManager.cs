@@ -199,8 +199,6 @@ private void Update()
         Constructable constructable = itemToBeConstructed.GetComponent<Constructable>();
         if(constructable == null) return;
         
-        constructable.GetComponent<Animator>().SetTrigger("Place");
-        
         constructable.enabled = false;
         constructable.SetDefaultColor();
         constructable.solidCollider.enabled = true;
@@ -218,6 +216,8 @@ private void Update()
         );
         itemToBeConstructed.transform.rotation = copyOfGhost.transform.rotation;
 
+        constructable.GetComponent<Animator>().SetTrigger("Place");
+        
         if(itemToBeConstructed.name == "FoundationModel")
         {
             constructable.ExtractGhostMembers();

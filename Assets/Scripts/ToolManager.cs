@@ -67,6 +67,15 @@ public class ToolManager : MonoBehaviour
                 if (selectedOre != null)
                 {
                     selectedOre.GetComponent<MineableOre>().GetHit();
+                    if (hitParticlePrefab != null)
+                    {
+                        Vector3 spawnPosition = hitPoint + hitNormal * particleOffset;
+                        Instantiate(
+                            hitParticlePrefab,
+                            spawnPosition,
+                            Quaternion.LookRotation(hitNormal)
+                        );
+                    }
                 }
             }
 

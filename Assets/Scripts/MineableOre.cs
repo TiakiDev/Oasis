@@ -79,7 +79,7 @@ public class MineableOre : MonoBehaviour
 
     private IEnumerator Hit()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0f);
         oreHealth -= 1f;
 
         if (oreHealth <= 0)

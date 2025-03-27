@@ -14,8 +14,6 @@ public class Constructable : MonoBehaviour
     
     public GameObject particlesPrefab;
     
-    [Header("Rotation Settings")]
-    public bool allowRotation = true;
     
     [Space]
     
@@ -28,7 +26,7 @@ public class Constructable : MonoBehaviour
 
     // Ground check
     public float maxGroundDistance = 1.5f;
-    public float surfaceOffset = 0.1f;
+    public float surfaceOffset = 1f;
     public LayerMask groundLayer;
 
 

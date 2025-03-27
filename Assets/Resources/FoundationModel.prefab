@@ -435,8 +435,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  redMaterial: {fileID: 2100000, guid: 156b4043a15b3c146b41b5a29d60182b, type: 2}
-  greenMaterial: {fileID: 2100000, guid: 18cae7e13599baf4dad508e5289fbc59, type: 2}
+  redMaterial: {fileID: 2100000, guid: 9cb7ef53304e28746bae0fe77dd20d97, type: 2}
+  greenMaterial: {fileID: 2100000, guid: 5b97a5732664cd94c86e01cfbe655e62, type: 2}
   defaultMaterial: {fileID: 2100000, guid: c2cf075d50d57b0458239dbaa6d06f2f, type: 2}
   ghostList: []
   solidCollider: {fileID: 5957405637783094989}

@@ -131,7 +131,6 @@ MonoBehaviour:
   isProp: 0
   needFoundation: 1
   particlesPrefab: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
-  allowRotation: 1
   isGrounded: 0
   isOverlappingItems: 0
   isValidToBeBuilt: 0
@@ -141,8 +140,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  redMaterial: {fileID: 2100000, guid: a130e5a64eebabf499965fdde76278ad, type: 2}
-  greenMaterial: {fileID: 2100000, guid: bc3e9726e4d384140b428935173b5cec, type: 2}
+  redMaterial: {fileID: 2100000, guid: 9cb7ef53304e28746bae0fe77dd20d97, type: 2}
+  greenMaterial: {fileID: 2100000, guid: 5b97a5732664cd94c86e01cfbe655e62, type: 2}
   defaultMaterial: {fileID: 2100000, guid: 730e682993b0c7a40943ba28adab5e86, type: 2}
   ghostList: []
   solidCollider: {fileID: 1126078228665193090}
@@ -198,7 +197,7 @@ Animator:
   m_GameObject: {fileID: 4477889315309355423}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0a6d87146d35994d811eae11b8f1868, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6892190826663494db793fc92cc259c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

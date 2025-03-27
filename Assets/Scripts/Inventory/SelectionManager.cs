@@ -117,7 +117,7 @@ private void Update()
         if (item && interactable.playerInRange && onTarget && !InventoryManager.instance.isOpen)
         {
             handCursor.SetActive(true);
-            anyCursorActive = true; // Aktywny kursor ręki
+            anyCursorActive = true; 
         }
         else
         {
@@ -138,19 +138,22 @@ private void Update()
             interactionText.alpha = 0;
         }
         
-        // Obsługa skrzyni
-        if (chest || workbench && interactable.playerInRange && onTarget)
+        //obsułga skrzyń i workbecnha
+        if ((chest != null || workbench != null) && interactable.playerInRange && onTarget && !InventoryManager.instance.isOpen)
         {
             interactionCursor.SetActive(true);
             anyCursorActive = true;
             
-            if (Input.GetKeyDown(KeyCode.Mouse0) && currentTarget != null && currentTarget.playerInRange && chest)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && currentTarget != null && currentTarget.playerInRange)
             {
-                chest.Interact();
-            }
-            if (Input.GetKeyDown(KeyCode.Mouse0) && currentTarget != null && currentTarget.playerInRange && workbench)
-            {
-                workbench.Interact();
+                if (chest != null)
+                {
+                    chest.Interact();
+                }
+                else if (workbench != null)
+                {
+                    workbench.Interact();
+                }
             }
         }
         else
