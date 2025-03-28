@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronOre
   m_EditorClassIdentifier: 
   itemName: Iron Ore
-  itemIcon: {fileID: 21300000, guid: 019da14b4a2499c45835a56d075add50, type: 3}
+  itemIcon: {fileID: 21300000, guid: a7eaad158ef175345aadd4e415665b38, type: 3}
   itemDescription: 
   itemType: 0
   hungerAmount: 0

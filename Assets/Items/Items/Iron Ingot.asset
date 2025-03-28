@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd0a0ea510abf9348afecb0ee7f387f2, type: 3}
-  m_Name: Rock
+  m_Name: Iron Ingot
   m_EditorClassIdentifier: 
-  itemName: Rock
-  itemIcon: {fileID: 21300000, guid: 17141dc38ec5ba0448d4d4676bd238e1, type: 3}
+  itemName: Iron ingot
+  itemIcon: {fileID: 21300000, guid: 782462bfab1978a4788c99a0d11f0c05, type: 3}
   itemDescription: 
   itemType: 4
   hungerAmount: 0

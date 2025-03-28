@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd0a0ea510abf9348afecb0ee7f387f2, type: 3}
-  m_Name: Rock
+  m_Name: Anvil
   m_EditorClassIdentifier: 
-  itemName: Rock
-  itemIcon: {fileID: 21300000, guid: 17141dc38ec5ba0448d4d4676bd238e1, type: 3}
+  itemName: Anvil
+  itemIcon: {fileID: 21300000, guid: d4c8b74f692728749aeca6ec77c0e5e3, type: 3}
   itemDescription: 
-  itemType: 4
+  itemType: 3
   hungerAmount: 0
   thirstAmount: 0
   healthAmount: 0
