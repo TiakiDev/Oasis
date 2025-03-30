@@ -44,10 +44,14 @@ public class Constructable : MonoBehaviour
         mRenderer = GetComponentInChildren<Renderer>();
         if(mRenderer == null) Debug.LogError("Renderer not found", this);
         mRenderer.material = defaultMaterial;
-        
+    
         foreach(Transform child in transform)
         {
-            ghostList.Add(child.gameObject);
+            GhostItem ghost = child.GetComponent<GhostItem>();
+            if (ghost != null)
+            {
+                ghostList.Add(child.gameObject);
+            }
         }
     }
 
@@ -81,11 +85,11 @@ public class Constructable : MonoBehaviour
             // Uwzględnij ręczną rotację
             Quaternion manualRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
             transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal) * manualRotation;
-            Debug.Log($"Hit ground at distance: {hit.distance}");
+            //Debug.Log($"Hit ground at distance: {hit.distance}");
             return true;
         }
         
-        Debug.Log("No ground detected!");
+        //Debug.Log("No ground detected!");
         return false;
     }
 

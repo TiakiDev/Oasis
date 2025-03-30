@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class CraftingManager : MonoBehaviour
     public Image itemIcon;
     public TMP_Text requirementsText;
     public TMP_Text workbenchTierText;
+    public Image craftingButtonEffect;
     
     public CraftingRecipeSO selectedRecipe;
     public Transform slotsContainer;
@@ -149,7 +151,7 @@ public class CraftingManager : MonoBehaviour
 
     public void CraftItem()
     {
-        if (!CanCraft(selectedRecipe)) return;
+        if (!CanCraft(selectedRecipe) || selectedRecipe == null) return;
 
         // Usuń wymagane przedmioty
         foreach (CraftingRecipeSO.ItemRequirement requirement in selectedRecipe.requiredItems)
@@ -158,12 +160,39 @@ public class CraftingManager : MonoBehaviour
         }
 
         // Dodaj wytworzony przedmiot
+        StartCoroutine(CraftingCoroutine(1f));
+    }
+
+    private IEnumerator CraftingCoroutine(float targetFillAmount)
+    {
+        float startFillAmount = craftingButtonEffect.fillAmount;
+        float elapsedTime = 0f;
+        float fillDuration = 0.8f;
+        
+        while (elapsedTime < fillDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / fillDuration);
+            
+            // Płynna interpolacja wartości fillAmount
+            craftingButtonEffect.fillAmount = Mathf.Lerp(startFillAmount, targetFillAmount, t);
+            
+            yield return null;
+        }
+        
+        // Upewniamy się, że na końcu mamy dokładnie wartość docelową
+        craftingButtonEffect.fillAmount = targetFillAmount;
+        
+        //* Tutaj jest to co się dzieje potem
+        
         InventoryManager.instance.AddItem(selectedRecipe.outputItem, selectedRecipe.outputQuantity);
         
+        craftingButtonEffect.fillAmount = 0f;
         UpdateRequirementsText();
     }
-    
-    private void UpdateRequirementsText()
+
+
+    public void UpdateRequirementsText()
     {
         if (selectedRecipe == null) return;
 

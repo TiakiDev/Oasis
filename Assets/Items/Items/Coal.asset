@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd0a0ea510abf9348afecb0ee7f387f2, type: 3}
-  m_Name: IronOre
+  m_Name: Coal
   m_EditorClassIdentifier: 
-  itemName: Iron Ore
-  itemIcon: {fileID: 21300000, guid: 636cbfd23061374438a138de1377c77e, type: 3}
+  itemName: Coal
+  itemIcon: {fileID: 21300000, guid: a7eaad158ef175345aadd4e415665b38, type: 3}
   maxStackSize: 64
   itemDescription: 
-  itemType: 0
+  itemType: 4
   hungerAmount: 0
   thirstAmount: 0
   healthAmount: 0
-  burnTime: 0
+  burnTime: 80

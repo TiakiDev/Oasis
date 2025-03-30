@@ -70,6 +70,7 @@ private void Update()
         Item item = selectionTransform.GetComponent<Item>();
         Chest chest = selectionTransform.GetComponent<Chest>();
         Workbench workbench = selectionTransform.GetComponent<Workbench>();
+        Furnace furnace = hit.transform.GetComponent<Furnace>();
 
         // Obsługa drzew
         if (choppableTree && choppableTree.playerInRange && !InventoryManager.instance.isOpen)
@@ -139,7 +140,7 @@ private void Update()
         }
         
         //obsułga skrzyń i workbecnha
-        if ((chest != null || workbench != null) && interactable.playerInRange && onTarget && !InventoryManager.instance.isOpen)
+        if ((chest != null || workbench != null || furnace != null) && interactable.playerInRange && onTarget && !InventoryManager.instance.isOpen)
         {
             interactionCursor.SetActive(true);
             anyCursorActive = true;
@@ -150,9 +151,13 @@ private void Update()
                 {
                     chest.Interact();
                 }
-                else if (workbench != null)
+                if (workbench != null)
                 {
                     workbench.Interact();
+                }
+                if (furnace != null)
+                {
+                    furnace.InteractFurnace();
                 }
             }
         }

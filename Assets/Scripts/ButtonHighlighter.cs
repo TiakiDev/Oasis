@@ -7,16 +7,20 @@ using TMPro;
 
 public class ButtonHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private TMP_Text buttonText;
-    [SerializeField] private Color color;
+    private Button button;
+    
+    void Start()
+    {
+        button = GetComponent<Button>();
+    }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        buttonText.color = color;
+        transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        buttonText.color = Color.white;
+        transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }

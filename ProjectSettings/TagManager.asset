@@ -17,6 +17,8 @@ TagManager:
   - Rock
   - placedProp
   - Foundation
+  - FxTemporaire
+  - Interactable
   layers:
   - Default
   - TransparentFX

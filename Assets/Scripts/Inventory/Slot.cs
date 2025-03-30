@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,7 +14,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     
     public ItemSO itemSO;
     public int quantity;
-    
+
+    private void Update()
+    {
+        if(quantity <= 0)
+        {
+            ClearSlot();
+        }
+    }
 
     public void AddItem(ItemSO item, int amount)
     {
@@ -39,7 +47,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     
     public void RemoveItem(int amount)
     {
-        quantity -= 1;
+        quantity -= amount;
         UpdateQuantityText();
         if (quantity <= 0)
         {
@@ -114,6 +122,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public void OnEndDrag(PointerEventData eventData)
 {
+    
     if (itemSO == null) return;
 
     quantityText.enabled = true;
@@ -123,7 +132,27 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         Destroy(dragIcon);
     }
-
+    
+    //Sloty w piecu
+    if (InventoryManager.instance.currentFurnace != null)
+    {
+        if (this == InventoryManager.instance.inputSlot)
+        {
+            InventoryManager.instance.currentFurnace.inputItem = itemSO;
+            InventoryManager.instance.currentFurnace.inputQuantity = quantity;
+        }
+        else if (this == InventoryManager.instance.fuelSlot)
+        {
+            InventoryManager.instance.currentFurnace.fuelItem = itemSO;
+            InventoryManager.instance.currentFurnace.fuelQuantity = quantity;
+        }
+        else if (this == InventoryManager.instance.outputSlot)
+        {
+            InventoryManager.instance.currentFurnace.outputItem = itemSO;
+            InventoryManager.instance.currentFurnace.outputQuantity = quantity;
+        }
+    }
+    //-------------------------------------
     if (eventData.pointerEnter != null)
     {
         Transform current = eventData.pointerEnter.transform;
@@ -131,6 +160,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             if (current.TryGetComponent<Slot>(out Slot itemSlot))
             {
+                
                 if (itemSlot == this) return; // Nie przenoś do samego siebie
 
                 // Przenoszenie do pustego slotu
@@ -178,8 +208,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             current = current.parent;
         }
     }
-
-    // Jeśli przedmiot nie został upuszczony na slot, przywróć go do oryginalnego miejsca
     icon.sprite = itemSO.itemIcon;
     UpdateQuantityText();
 }
@@ -199,11 +227,31 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         UpdateQuantityText();
     }
     
+    
     //for chests
     public void ForceSetItem(ItemSO item, int amount)
     {
         itemSO = item;
         quantity = amount;
+        
+        if (InventoryManager.instance.currentFurnace != null)
+        {
+            if (this == InventoryManager.instance.inputSlot)
+            {
+                InventoryManager.instance.currentFurnace.inputItem = item;
+                InventoryManager.instance.currentFurnace.inputQuantity = amount;
+            }
+            else if (this == InventoryManager.instance.fuelSlot)
+            {
+                InventoryManager.instance.currentFurnace.fuelItem = item;
+                InventoryManager.instance.currentFurnace.fuelQuantity = amount;
+            }
+            else if (this == InventoryManager.instance.outputSlot)
+            {
+                InventoryManager.instance.currentFurnace.outputItem = item;
+                InventoryManager.instance.currentFurnace.outputQuantity = amount;
+            }
+        }
     
         if (item != null)
         {

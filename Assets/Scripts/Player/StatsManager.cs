@@ -27,7 +27,6 @@ public class StatsManager : MonoBehaviour
     [SerializeField] private float healthDrainInterval = 5f;
     [SerializeField] private int healthDrainAmount = 1;
     [Header("Oxygen Drain Settings")]
-    [SerializeField] private float oxygenDrainInterval = 1f;
     [SerializeField] private int oxygenDrainAmount = 1;
     [Space]
     [Header("References")]

@@ -1,33 +1,49 @@
-using System;
+
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
+
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
+    
     public bool isOpen;
 
-    [SerializeField] private GameObject inventoryPanel;
+    [Header("Panels")]
+    [SerializeField] public GameObject inventoryPanel;
     [SerializeField] private GameObject craftingPanel;
     [SerializeField] private GameObject chestPanel;
-
-    [SerializeField] private GameObject crosshairs;
+    [SerializeField] private GameObject furnacePanel;
+    [Header("infos")]
+    [SerializeField] public GameObject crosshairs;
     [SerializeField] private GameObject infoHolder;
     
     private int currentSlotIndex = 0;  // Aktualnie wybrany slot
     private float accumulatedScroll;   // Akumulowana wartość scrolla
     
     public bool canChangeSlots = true;
-    
+    [Header("Slots")]
     public List<Slot> itemSlots = new List<Slot>();
     public List<QuickSlot> quickSlots = new List<QuickSlot>();
-    
-    //chest
     public List<Slot> chestSlots = new List<Slot>();
+    [Space]
     public Chest currentChest;
     
-    private RectTransform panelRectTransform;
+    [Header("Furnace")]
+    [SerializeField]
+    public Slot inputSlot;
+    [SerializeField] public Slot fuelSlot;
+    [SerializeField] public Slot outputSlot;
+    public Furnace currentFurnace;
+    
+    [Header("Furnace UI")]
+    [SerializeField] private Image smeltingProgressImage;
+    [SerializeField] private Image fuelProgressImage;
+
+    
+
+    public RectTransform panelRectTransform;
 
     public void AddItem(ItemSO item, int amount = 1)
     {
@@ -118,6 +134,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
     
+    
     public int GetItemQuantity(ItemSO item)
     {
         int total = 0;
@@ -157,6 +174,72 @@ public class InventoryManager : MonoBehaviour
         SelectionManager.instance.interactionText.gameObject.SetActive(false);
             
         ConstructionManager.instance.ExitConstructionMode();
+    }
+    
+    public void OpenFurnace(Furnace furnace)
+    {
+        currentFurnace = furnace;
+        inventoryPanel.SetActive(true);
+        furnacePanel.SetActive(true);
+        isOpen = true;
+        crosshairs.SetActive(false);
+        
+        inputSlot.ForceSetItem(furnace.inputItem, furnace.inputQuantity);
+        fuelSlot.ForceSetItem(furnace.fuelItem, furnace.fuelQuantity);
+        outputSlot.ForceSetItem(furnace.outputItem, furnace.outputQuantity);
+        
+        
+        panelRectTransform.anchoredPosition = new Vector2(-331.75f, 0);
+        
+        UpdateFurnaceUI();
+        
+        FirstPersonController.instance.lockCursor = false;
+        FirstPersonController.instance.cameraCanMove = false;
+        FirstPersonController.instance.crosshairObject.gameObject.SetActive(false);
+        SelectionManager.instance.interactionText.gameObject.SetActive(false);
+            
+        ConstructionManager.instance.ExitConstructionMode();
+    }
+
+    public void UpdateFurnaceUI()
+    {
+        if (currentFurnace == null) return;
+
+        if (inputSlot != null)
+            inputSlot.ForceSetItem(currentFurnace.inputItem, currentFurnace.inputQuantity);
+        if (fuelSlot != null)
+            fuelSlot.ForceSetItem(currentFurnace.fuelItem, currentFurnace.fuelQuantity);
+        if (outputSlot != null)
+            outputSlot.ForceSetItem(currentFurnace.outputItem, currentFurnace.outputQuantity);
+        
+        UpdateSmeltingProgress();
+        UpdateFuelProgress();
+    }
+    
+    void UpdateSmeltingProgress()
+    {
+        if (currentFurnace.currentRecipe != null && currentFurnace.currentRecipe.smeltingTime > 0)
+        {
+            float progress = currentFurnace.currentSmeltTime / currentFurnace.currentRecipe.smeltingTime;
+            smeltingProgressImage.fillAmount = Mathf.Clamp01(progress);
+        }
+        else
+        {
+            smeltingProgressImage.fillAmount = 0;
+        }
+    }
+
+    void UpdateFuelProgress()
+    {
+        if (currentFurnace.fuelItem != null && currentFurnace.fuelItem.burnTime > 0)
+        {
+            float progress = currentFurnace.remainingBurnTime / currentFurnace.fuelItem.burnTime;
+            fuelProgressImage.fillAmount = Mathf.Clamp01(progress);
+        }
+        else
+        {
+            fuelProgressImage.fillAmount = 0;
+        }
     }
     
     public void RefreshChestUI()
@@ -200,11 +283,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void CloseAllTabs()
+    public void CloseAllTabs()
     {
         inventoryPanel.SetActive(false);
         craftingPanel.SetActive(false);
         chestPanel.SetActive(false);
+        furnacePanel.SetActive(false);
         isOpen = false;
             
         FirstPersonController.instance.lockCursor = true;
@@ -216,21 +300,36 @@ public class InventoryManager : MonoBehaviour
         panelRectTransform.anchoredPosition = new Vector2(0, 0);
         
         //chest stuff
-        chestPanel.SetActive(false);
-        chestPanel.SetActive(false);
         SaveChestData();
                 
         foreach (Slot slot in chestSlots)
         {
             slot.ClearSlot();
         }
+        
+        if (currentFurnace != null)
+        {
+            currentFurnace.inputItem = inputSlot.itemSO;
+            currentFurnace.inputQuantity = inputSlot.quantity;
+            currentFurnace.fuelItem = fuelSlot.itemSO;
+            currentFurnace.fuelQuantity = fuelSlot.quantity;
+            currentFurnace.outputItem = outputSlot.itemSO;
+            currentFurnace.outputQuantity = outputSlot.quantity;
+        }
     
         currentChest = null;
+        currentFurnace = null;
+        
         crosshairs.SetActive(true);
     }
     
     private void Update()
     {
+        if (isOpen && currentFurnace != null)
+        {
+            UpdateSmeltingProgress();
+            UpdateFuelProgress();
+        }
         
         if (Input.GetKeyDown(KeyCode.Tab) && isOpen)
         {
@@ -285,22 +384,15 @@ public class InventoryManager : MonoBehaviour
     
     private void SlotChangingHandler()
     {
-
-        // Obsługa scrolla
         accumulatedScroll += Input.GetAxis("Mouse ScrollWheel");
-        
-        // Sprawdź czy scroll wystarczająco się przemieścił (0.1 = 1 "kliknięcie" scrolla)
         if (Mathf.Abs(accumulatedScroll) >= 0.1f)
         {
-            int steps = (int)(accumulatedScroll * 10); // Każdy "klik" to 0.1, mnożymy przez 10 by dostać liczbę kroków
+            int steps = (int)(accumulatedScroll * 10);
             steps *= -1;
             currentSlotIndex += steps;
-
-            // Zawijanie indeksu (np. od 0 do 5 dla 6 slotów)
             currentSlotIndex = (currentSlotIndex % quickSlots.Count + quickSlots.Count) % quickSlots.Count;
-
             quickSlots[currentSlotIndex].SelectSlot();
-            accumulatedScroll = 0f; // Reset akumulacji
+            accumulatedScroll = 0f;
         }
     }
     

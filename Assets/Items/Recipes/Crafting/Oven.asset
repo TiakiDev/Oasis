@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2234862121afd7408ad6bf10127d4ae, type: 3}
   m_Name: Oven
   m_EditorClassIdentifier: 
-  outputItem: {fileID: 11400000, guid: f30accd35b54dab4a965f3b39bd122d0, type: 2}
+  outputItem: {fileID: 11400000, guid: 4f96b6f0522f03944993e24cf0c94497, type: 2}
   outputQuantity: 1
   requiredItems:
   - item: {fileID: 11400000, guid: 72e49ba7f767d264d9dc5f4a95efdd18, type: 2}
