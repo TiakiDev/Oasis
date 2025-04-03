@@ -176,8 +176,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7373962301176439617}
   - component: {fileID: 7567185835351426766}
-  - component: {fileID: 8898879725694675891}
   - component: {fileID: 2153517949392169838}
+  - component: {fileID: 5755249722410642931}
   m_Layer: 0
   m_Name: Ore
   m_TagString: Untagged
@@ -222,27 +222,6 @@ MonoBehaviour:
   oreName: Iron Ore
   isStone: 0
   minedOrePrefab: {fileID: 4340275442105223803, guid: ae6bbff4b5558204a942b89c479979f5, type: 3}
---- !u!65 &8898879725694675891
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9180953731064854883}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6464453, y: 1, z: 4.922903}
-  m_Center: {x: 0.2890935, y: 0, z: 0.09561634}
 --- !u!136 &2153517949392169838
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -266,3 +245,24 @@ CapsuleCollider:
   m_Height: 1.5181984
   m_Direction: 1
   m_Center: {x: 0.1786995, y: 0.2590992, z: 0}
+--- !u!65 &5755249722410642931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9180953731064854883}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -285,13 +285,12 @@ MonoBehaviour:
   lowThirstThreshold: 10
   healthDrainInterval: 5
   healthDrainAmount: 1
-  oxygenDrainInterval: 1
   oxygenDrainAmount: 10
   healthBar: {fileID: 1472891018}
   foodBar: {fileID: 1725087960}
   waterBar: {fileID: 2131995354}
   oxygenBar: {fileID: 296176532}
-  oxygenBarGameobject: {fileID: 661136591}
+  oxygenBarGameObject: {fileID: 0}
   hungerDepletionInterval: 0
   thirstDepletionInterval: 5
   shouldDrainOxygen: 0
@@ -3558,7 +3557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -93.529175, y: -7.4002686}
+  m_AnchoredPosition: {x: -93.53052, y: -7.4002686}
   m_SizeDelta: {x: -209.5, y: -85.527}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522389733
@@ -3875,6 +3874,7 @@ MonoBehaviour:
   structureLayer:
     serializedVersion: 2
     m_Bits: 512
+  rotationSpeed: 100
   itemToBeConstructed: {fileID: 0}
   inConstructionMode: 0
   constructionHoldingSpot: {fileID: 1961646364}
@@ -3910,6 +3910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolHolderAnimator: {fileID: 584315118}
+  hitParticlePrefab: {fileID: 0}
+  particleOffset: 0.2
 --- !u!114 &637209805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7509,7 +7511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   inventoryPanel: {fileID: 506807010}
+  craftingPanel: {fileID: 0}
   chestPanel: {fileID: 392991146}
+  furnacePanel: {fileID: 0}
   crosshairs: {fileID: 93936158}
   infoHolder: {fileID: 1944398503}
   canChangeSlots: 1
@@ -7614,6 +7618,13 @@ MonoBehaviour:
   - {fileID: 1774685690}
   - {fileID: 1683742611}
   currentChest: {fileID: 0}
+  inputSlot: {fileID: 0}
+  fuelSlot: {fileID: 0}
+  outputSlot: {fileID: 0}
+  currentFurnace: {fileID: 0}
+  smeltingProgressImage: {fileID: 0}
+  fuelProgressImage: {fileID: 0}
+  panelRectTransform: {fileID: 0}
 --- !u!224 &1101586887
 RectTransform:
   m_ObjectHideFlags: 0
