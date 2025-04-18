@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0a0ea510abf9348afecb0ee7f387f2, type: 3}
+  m_Name: StoneAxe
+  m_EditorClassIdentifier: 
+  itemName: Stone axe
+  itemIcon: {fileID: 21300000, guid: dbcd598599a08924bb27bc9d95bdade0, type: 3}
+  maxStackSize: 64
+  itemDescription: 
+  itemType: 1
+  hungerAmount: 0
+  thirstAmount: 0
+  healthAmount: 0
+  burnTime: 0

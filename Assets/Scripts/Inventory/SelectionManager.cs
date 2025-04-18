@@ -65,8 +65,10 @@ private void Update()
         var selectionTransform = hit.transform;
 
         InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
-        ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
-        MineableOre mineableOre = selectionTransform.GetComponent<MineableOre>();
+        //ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
+        //MineableOre mineableOre = selectionTransform.GetComponent<MineableOre>();
+        ChoppableTree choppableTree = selectionTransform.GetComponentInParent<ChoppableTree>();
+        MineableOre mineableOre = selectionTransform.GetComponentInParent<MineableOre>();
         Item item = selectionTransform.GetComponent<Item>();
         Chest chest = selectionTransform.GetComponent<Chest>();
         Workbench workbench = selectionTransform.GetComponent<Workbench>();
@@ -81,6 +83,9 @@ private void Update()
             infoHolder.GetComponentInChildren<TMP_Text>().text = choppableTree.GetName();
             axeCursor.SetActive(true);
             anyCursorActive = true; // Aktywny kursor siekiery
+            
+            GlobalState.instance.resourceHealth = choppableTree.treeHealth;
+            GlobalState.instance.resourceMaxHealth = choppableTree.treeMaxHealth;
         }
         else
         {
@@ -102,6 +107,9 @@ private void Update()
             infoHolder.GetComponentInChildren<TMP_Text>().text = mineableOre.GetName();
             pickaxeCursor.SetActive(true);
             anyCursorActive = true; // Aktywny kursor kilofa
+            
+            GlobalState.instance.resourceHealth = mineableOre.oreHealth;
+            GlobalState.instance.resourceMaxHealth = mineableOre.oreMaxHealth;
         }
         else
         {

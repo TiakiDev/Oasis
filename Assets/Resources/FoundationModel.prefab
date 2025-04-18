@@ -425,12 +425,11 @@ MonoBehaviour:
   isProp: 0
   needFoundation: 0
   particlesPrefab: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
-  allowRotation: 0
   isGrounded: 0
   isOverlappingItems: 0
   isValidToBeBuilt: 0
   detectedGhostMemeber: 0
-  maxGroundDistance: 5
+  maxGroundDistance: 1000
   surfaceOffset: 0.75
   groundLayer:
     serializedVersion: 2

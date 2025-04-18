@@ -38,7 +38,7 @@ public class ChoppableTree : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (canBeChopped)
         {

@@ -16,5 +16,7 @@ MonoBehaviour:
   outputQuantity: 1
   requiredItems:
   - item: {fileID: 11400000, guid: 72e49ba7f767d264d9dc5f4a95efdd18, type: 2}
-    quantity: 10
+    quantity: 15
+  - item: {fileID: 11400000, guid: 649780532e046ff409ebd9a844a7717c, type: 2}
+    quantity: 5
   requiredWorkbenchTier: 2

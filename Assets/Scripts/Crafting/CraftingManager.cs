@@ -27,6 +27,11 @@ public class CraftingManager : MonoBehaviour
 
     public GameObject slotPrefab;
     
+    [Header("Requirements UI")]
+    public Transform requirementsContainer; // Kontener dla elementów wymagań
+    public GameObject requirementEntryPrefab; // Prefab dla pojedynczego wymagania
+    private List<RequirementEntry> currentRequirementEntries = new List<RequirementEntry>();
+    
     
     private void Awake()
     {
@@ -83,23 +88,35 @@ public class CraftingManager : MonoBehaviour
     public void SelectItemToCraft(CraftingRecipeSO recipe)
     {
         selectedRecipe = recipe;
-        
+    
         itemNameText.text = recipe.outputItem.itemName;
         itemDescriptionText.text = recipe.outputItem.itemDescription;
         itemIcon.sprite = recipe.outputItem.itemIcon;
-        
-        // Tekst wymagań
-        string requirements = "";
+
+        // Wyczyść poprzednie wymagania
+        foreach (Transform child in requirementsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        currentRequirementEntries.Clear();
+
+        // Dodaj nowe wymagania
         foreach (var req in recipe.requiredItems)
         {
+            GameObject entry = Instantiate(requirementEntryPrefab, requirementsContainer);
+            RequirementEntry entryUI = entry.GetComponent<RequirementEntry>();
+        
+            entryUI.item = req.item;
+            entryUI.icon.sprite = req.item.itemIcon;
+        
             int currentAmount = InventoryManager.instance.GetItemQuantity(req.item);
             string color = (currentAmount >= req.quantity) ? "green" : "red";
-            requirements += $"<color={color}>{req.item.itemName}: {currentAmount}/{req.quantity}</color>\n";
-        }
+            entryUI.text.text = $"<color={color}>{req.item.itemName}: {currentAmount}/{req.quantity}</color>";
         
-        string tierInfo = (recipe.requiredWorkbenchTier > 0) ? $"Workbench tier {recipe.requiredWorkbenchTier} required" : "No workbench needed";
+            currentRequirementEntries.Add(entryUI);
+        }
 
-        requirementsText.text = requirements;
+        string tierInfo = (recipe.requiredWorkbenchTier > 0) ? $"Workbench tier required: {recipe.requiredWorkbenchTier}" : "No workbench required";
         workbenchTierText.text = tierInfo;
     }
 
@@ -196,15 +213,12 @@ public class CraftingManager : MonoBehaviour
     {
         if (selectedRecipe == null) return;
 
-        // Aktualizacja wymagań przedmiotów
-        string requirements = "";
-        foreach (var req in selectedRecipe.requiredItems)
+        foreach (RequirementEntry entry in currentRequirementEntries)
         {
-            int currentAmount = InventoryManager.instance.GetItemQuantity(req.item);
-            string color = (currentAmount >= req.quantity) ? "green" : "red";
-            requirements += $"<color={color}>{req.item.itemName}: {currentAmount}/{req.quantity}</color>\n";
+            int currentAmount = InventoryManager.instance.GetItemQuantity(entry.item);
+            int required = System.Array.Find(selectedRecipe.requiredItems, r => r.item == entry.item).quantity;
+            string color = (currentAmount >= required) ? "green" : "red";
+            entry.text.text = $"<color={color}>{entry.item.itemName}: {currentAmount}/{required}</color>";
         }
-        
-        requirementsText.text = requirements;
     }
 }

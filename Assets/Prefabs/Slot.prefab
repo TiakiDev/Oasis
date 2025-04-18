@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 551547644803071622}
   - component: {fileID: 467953280349456237}
   - component: {fileID: 5351180325158872423}
+  - component: {fileID: 371912263058476877}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -317,3 +318,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &371912263058476877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149930866962967880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf0eccf7c785044db9f35677a4e1763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTime: 0.15

@@ -41,7 +41,7 @@ public class MineableOre : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (canBeMined)
         {

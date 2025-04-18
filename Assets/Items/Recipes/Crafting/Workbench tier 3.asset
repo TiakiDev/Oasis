@@ -17,4 +17,8 @@ MonoBehaviour:
   requiredItems:
   - item: {fileID: 11400000, guid: 649780532e046ff409ebd9a844a7717c, type: 2}
     quantity: 10
+  - item: {fileID: 11400000, guid: 9a05d5ae105598742941fcc953049c4a, type: 2}
+    quantity: 20
+  - item: {fileID: 11400000, guid: 2012fe89cb136924b98ab51133a21f8f, type: 2}
+    quantity: 3
   requiredWorkbenchTier: 2

@@ -136,8 +136,8 @@ MonoBehaviour:
   isOverlappingItems: 0
   isValidToBeBuilt: 0
   detectedGhostMemeber: 0
-  maxGroundDistance: 1.5
-  surfaceOffset: 1
+  maxGroundDistance: 2
+  surfaceOffset: 1.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -186,8 +186,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.988477, y: 1.743193, z: 1.161257}
-  m_Center: {x: 0.00022649765, y: 0.00022250414, z: 0.0049425066}
+  m_Size: {x: 1.988477, y: 2.5824673, z: 1.161257}
+  m_Center: {x: 0.00022649765, y: -0.41941437, z: 0.0049425364}
 --- !u!65 &3865223174548873584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -207,5 +207,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 3.5, z: 3.5}
-  m_Center: {x: 0.00022649765, y: 0.00022250414, z: 0.0049425066}
+  m_Size: {x: 3.5, y: 4.061242, z: 3.5}
+  m_Center: {x: 0.00022649765, y: -0.2803988, z: 0.0049425364}
