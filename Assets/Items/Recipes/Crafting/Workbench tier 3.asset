@@ -15,10 +15,12 @@ MonoBehaviour:
   outputItem: {fileID: 11400000, guid: 4b9549b2a40aefc4b9d52b5a249ec233, type: 2}
   outputQuantity: 1
   requiredItems:
-  - item: {fileID: 11400000, guid: 649780532e046ff409ebd9a844a7717c, type: 2}
+  - item: {fileID: 11400000, guid: c6ebb041f46da7c49b065c63ca8fc5a5, type: 2}
     quantity: 10
   - item: {fileID: 11400000, guid: 9a05d5ae105598742941fcc953049c4a, type: 2}
     quantity: 20
   - item: {fileID: 11400000, guid: 2012fe89cb136924b98ab51133a21f8f, type: 2}
     quantity: 3
+  - item: {fileID: 11400000, guid: 8dd75d9a429510948beb4a5390d30ace, type: 2}
+    quantity: 5
   requiredWorkbenchTier: 2

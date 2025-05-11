@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject craftingPanel;
     [SerializeField] private GameObject chestPanel;
     [SerializeField] private GameObject furnacePanel;
+    [SerializeField] private GameObject journalPanel;
     [Header("infos")]
     [SerializeField] public GameObject crosshairs;
     [SerializeField] private GameObject infoHolder;
@@ -289,6 +290,7 @@ public class InventoryManager : MonoBehaviour
         craftingPanel.SetActive(false);
         chestPanel.SetActive(false);
         furnacePanel.SetActive(false);
+        journalPanel.SetActive(false);
         isOpen = false;
             
         FirstPersonController.instance.lockCursor = true;
@@ -369,6 +371,7 @@ public class InventoryManager : MonoBehaviour
     {
         CloseAllTabs();
         
+        CraftingManager.instance.UpdateRequirementsText();
         craftingPanel.SetActive(true);
         isOpen = true;
         FirstPersonController.instance.lockCursor = false;
@@ -380,6 +383,22 @@ public class InventoryManager : MonoBehaviour
             
         crosshairs.SetActive(false);
         
+    }
+    
+    public void OpenJournalMenu()
+    {
+        CloseAllTabs();
+        
+        journalPanel.SetActive(true);
+        isOpen = true;
+        FirstPersonController.instance.lockCursor = false;
+        FirstPersonController.instance.cameraCanMove = false;
+        FirstPersonController.instance.crosshairObject.gameObject.SetActive(false);
+        SelectionManager.instance.interactionText.gameObject.SetActive(false);
+            
+        ConstructionManager.instance.ExitConstructionMode();
+            
+        crosshairs.SetActive(false);
     }
     
     private void SlotChangingHandler()

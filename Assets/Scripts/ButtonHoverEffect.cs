@@ -14,6 +14,13 @@ public class ButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerEx
         rectTransform = GetComponent<RectTransform>();
         normalScale = rectTransform.localScale;
         targetScale = normalScale * scaleFactor; 
+        rectTransform.localScale = normalScale;
+    }
+    
+    void OnEnable()
+    {
+        if (rectTransform != null)
+            rectTransform.localScale = normalScale;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -28,10 +28,10 @@ TagManager:
   - UI
   - Tool
   - Ground
-  - 
+  - Player
   - Structure
   - PostProcesing
-  - 
+  - NoPlayerCollsion
   - 
   - 
   - 

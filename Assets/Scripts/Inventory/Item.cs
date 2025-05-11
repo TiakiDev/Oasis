@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
 {
     public ItemSO itemSO;
     public int quantity = 1;
+    public bool collision = true;
 
     private InteractableObject interactable;
 
@@ -16,7 +17,22 @@ public class Item : MonoBehaviour
     {
         interactable = GetComponent<InteractableObject>();
     }
-    
+
+    private void Start()
+    {
+        if(!collision)
+        {
+            Collider[] colliders = GetComponents<Collider>();
+            foreach (Collider col in colliders)
+            {
+                if (!col.isTrigger)
+                {
+                    Physics.IgnoreCollision(col,SelectionManager.instance.playerObject.GetComponent<Collider>());
+                }
+            }
+        }
+    }
+
 
     private void Update()
     {

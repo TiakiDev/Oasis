@@ -8,6 +8,7 @@ public class ChoppableTree : MonoBehaviour
 {
     public bool playerInRange;
     public bool canBeChopped;
+    public bool stickTree;
 
     public float treeMaxHealth;
     public float treeHealth;
@@ -61,8 +62,15 @@ public class ChoppableTree : MonoBehaviour
         SelectionManager.instance.selectedTree = null;
         SelectionManager.instance.infoHolder.gameObject.SetActive(false);
         SelectionManager.instance.axeCursor.SetActive(false);
-        
-        GameObject brokeTreen = Instantiate(Resources.Load<GameObject>("Prefabs/ChoppedTree"), treePosition, Quaternion.identity);
+
+        if (stickTree)
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/ChoppedStickTree"), treePosition, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/ChoppedTree"), treePosition, Quaternion.identity);
+        }
     }
 
     private IEnumerator Hit()

@@ -30,6 +30,8 @@ public class SelectionManager : MonoBehaviour
     public static Vector3 lastHitPoint;
     public static Vector3 lastHitNormal;
     
+    public GameObject playerObject;
+    
 
     private void Awake()
     {
