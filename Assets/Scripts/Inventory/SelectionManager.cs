@@ -26,6 +26,7 @@ public class SelectionManager : MonoBehaviour
     //resource variables
     public GameObject selectedTree;
     public GameObject selectedOre;
+    public GameObject selectedCrate;
     
     public static Vector3 lastHitPoint;
     public static Vector3 lastHitNormal;
@@ -67,10 +68,9 @@ private void Update()
         var selectionTransform = hit.transform;
 
         InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
-        //ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
-        //MineableOre mineableOre = selectionTransform.GetComponent<MineableOre>();
         ChoppableTree choppableTree = selectionTransform.GetComponentInParent<ChoppableTree>();
         MineableOre mineableOre = selectionTransform.GetComponentInParent<MineableOre>();
+        Crate crate = selectionTransform.GetComponent<Crate>();
         Item item = selectionTransform.GetComponent<Item>();
         Chest chest = selectionTransform.GetComponent<Chest>();
         Workbench workbench = selectionTransform.GetComponent<Workbench>();
@@ -121,6 +121,28 @@ private void Update()
                 selectedOre = null;
                 infoHolder.gameObject.SetActive(false);
                 pickaxeCursor.SetActive(false);
+            }
+        }
+        
+        //obsługa crate'ów
+        if (crate && crate.playerInRange)
+        {
+            selectedCrate = crate.gameObject;
+            infoHolder.gameObject.SetActive(true);
+            infoHolder.GetComponentInChildren<TMP_Text>().text = crate.GetName();
+            axeCursor.SetActive(true);
+            anyCursorActive = true; // Aktywny kursor kilofa
+            
+            GlobalState.instance.resourceHealth = crate.health;
+            GlobalState.instance.resourceMaxHealth = crate.maxHealth;
+        }
+        else
+        {
+            if (selectedCrate != null) 
+            {
+                selectedCrate = null;
+                infoHolder.gameObject.SetActive(false);
+                axeCursor.SetActive(false);
             }
         }
 

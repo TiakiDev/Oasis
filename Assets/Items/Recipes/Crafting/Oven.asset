@@ -19,4 +19,4 @@ MonoBehaviour:
     quantity: 15
   - item: {fileID: 11400000, guid: 649780532e046ff409ebd9a844a7717c, type: 2}
     quantity: 5
-  requiredWorkbenchTier: 2
+  requiredWorkbenchTier: 1
